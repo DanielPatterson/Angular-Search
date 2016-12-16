@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="en" ng-app="App" ng-controller="AppCtrl">
+<head>
+    <meta charset="utf-8">
+    <title></title>
+    
+    <link href="build/bootstrap-3.3.6/css/bootstrap.css" rel="stylesheet">
+    <link href="build/font-awesome-4.6.3/css/font-awesome.css" rel="stylesheet">
+
+</head> 
+
+<body>
+<div class="container">                      
+    <h1>Basic Angular Search</h1>
+    <input ng-model="query" class="form-control search" placeholder="what are you looking for?">
+    <hr />
+    <div ng-init="filtered = (searchList | filter:query | orderBy:orderProp)">
+        <div ng-switch="(searchList | filter:query).length">
+            <span ng-switch-when="0">
+                <div class="panel">
+                    <div class="panel-heading">
+                        <h4><i class="fa fa-frown-o fa-3x"></i> No Results Found</h4>
+                    </div>
+                </div>
+            </span>
+        </div>
+
+        <div ng-repeat="text in searchList | filter:query | orderBy:orderProp">
+            <ul class="list-unstyled results-list">
+                <li class="text-uppercase">{{text.name}}</li>
+                <li><a ng-href="{{text.url}}">{{text.url}}</a></li>
+                <li><small>Located in: {{text.section}}</small></li>
+                <hr />
+            </ul>
+        </div>
+        
+    </div>
+</div>
+</body>
+</html>
+<script src="build/jquery-1.11.3/jquery-1.11.3.js"></script>
+<script src="build/bootstrap-3.3.6/js/bootstrap.js"></script>
+
+<script src="build/angular-v1.0.3/angular.js"></script>
+<script src="build/js/search-app.js"></script>
